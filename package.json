@@ -1,10 +1,24 @@
 {
   "name": "vue-rank-slider",
   "version": "0.1.0",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Anluis/vue-rank-slider"
+  },
+  "author": "Anluis",
+  "license": "MIT",
+  "main": "dist/vue-rank-slider.umd.js",
+  "module": "dist/vue-rank-slider.esm.js",
+  "unpkg": "dist/vue-rank-slider.min.js",
+  "browser": {
+    "./sfc": "src/RankSlider.vue"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "yarn build:umd & yarn build:es & yarn build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-rank-slider.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-rank-slider.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-rank-slider.min.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -26,6 +40,10 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^1.19.1",
+    "rollup": "^2.0.2",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "^5.1.6",
     "vue-template-compiler": "^2.6.11"
   }
 }
