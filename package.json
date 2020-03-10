@@ -1,6 +1,14 @@
 {
   "name": "vue-rank-slider",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "A component for vue, get rank value by slide",
+  "keywords": [
+    "vue",
+    "component",
+    "rank",
+    "slider",
+    "rank slider"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Anluis/vue-rank-slider"

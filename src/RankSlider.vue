@@ -9,13 +9,12 @@
   >
     <div class="line">
       <div
-        :class="lineColor(index)"
         class="circle-o"
         :style="{
           backgroundColor: value > index + 1 ? color : defaultColor,
-          flex: index === 9 ? 0 : 1
+          flex: index === max - 1 ? 0 : 1
         }"
-        v-for="(item, index) in 10"
+        v-for="(item, index) in max"
         :key="index"
       >
         <div
@@ -38,14 +37,17 @@
     <div class="number">
       <div
         :style="{
-          backgroundColor: index !== 9 ? '' : color,
-          flex: index !== 9 ? 1 : 0
+          backgroundColor: index !== max ? '' : color,
+          flex: index !== max - 1 ? 1 : 0
         }"
-        v-for="(item, index) in 10"
+        v-for="(item, index) in max"
         :key="index"
       >
         <div class="number-i">
-          <span v-show="index % 2 === 0" :style="{ opacity: index / 10 + 0.1 }">
+          <span
+            v-show="index % 2 === 0"
+            :style="{ opacity: index / max + 0.1 }"
+          >
             {{ index + 1 }}
           </span>
         </div>
@@ -64,7 +66,7 @@
 
 <script>
 export default {
-  name: "SliderRanking",
+  name: "RankSlider",
   props: {
     disabled: {
       type: Boolean,
@@ -173,16 +175,6 @@ export default {
     updateValue(value) {
       this.value = this.format(value);
     },
-    lineColor(index) {
-      let className = "circle-o";
-      if (this.value > index + 1) {
-        className += " colored";
-      }
-      if (index === 9) {
-        className += " last";
-      }
-      return className;
-    },
     handleClick(event) {
       event.stopPropagation();
       if (this.disabled) {
@@ -217,17 +209,6 @@ export default {
     width: 100%;
     display: flex;
     .circle-o {
-      // background: rgba(240, 240, 240, 1);
-      &.colored {
-        // background: rgba(253, 205, 0, 1);
-        &.last {
-          // flex: 0;
-        }
-      }
-      &.last {
-        // flex: 0;
-      }
-      flex: 1;
       position: relative;
       .circle-i {
         width: 10px;
@@ -236,10 +217,6 @@ export default {
         position: absolute;
         left: 0;
         transform: translate(-50%, -25%);
-        // background: rgba(240, 240, 240, 1);
-        // &.colored {
-        //   background: rgba(253, 205, 0, 1);
-        // }
       }
       .circle-big {
         width: 36px;
@@ -247,7 +224,6 @@ export default {
         position: absolute;
         left: 0;
         border-radius: 50%;
-        // background: rgba(253, 205, 0, 1);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -269,15 +245,8 @@ export default {
     display: flex;
     align-items: center;
     .number-o {
-      // flex: 1;
       position: relative;
       font-size: 14px;
-      // &.last {
-      //   flex: 0;
-      //   &.colored {
-      //     background: rgba(253, 205, 0, 1);
-      //   }
-      // }
       .number-i {
         position: absolute;
         left: 0;
@@ -293,7 +262,6 @@ export default {
     line-height: 25px;
     width: 100%;
     margin-top: 20px;
-
     .left {
       opacity: 0.5;
       color: rgba(206, 206, 206, 1);
