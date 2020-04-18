@@ -1,6 +1,6 @@
 {
   "name": "vue-rank-slider",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A component for vue, get rank value by slide",
   "keywords": [
     "vue",
